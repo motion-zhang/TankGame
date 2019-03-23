@@ -47,6 +47,15 @@ public class Tank implements ITank {
 	}
 
 
+	@Override
+	public int getX() {
+		return this.x;
+	}
+
+	@Override
+	public int getY() {
+		return this.y;
+	}
 
 	@Override
 	public Steering getVelocity() {

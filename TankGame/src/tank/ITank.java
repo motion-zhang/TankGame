@@ -14,5 +14,9 @@ public interface ITank {
 
 	void CollideWall();
 
+	int getX();
+
+	int getY();
+
 
 }
