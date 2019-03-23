@@ -6,7 +6,12 @@ import engine.GameEngine;
 import bullet.Bullet;
 import UI.GameStartUI;
 
-public class Tank extends Thread {
+public class Tank implements ITank {
+
+	private boolean alive = false; // Check whether tank alive
+	private Steering vel = new Steering(); // velocity according to steering behavior
+
+
 	public int type;// 坦克类型 0:老巢 大于0：玩家坦克 小于0：敌方坦克（电脑）
 	public int x, y;// 坦克的当前位置
 	public int size = 16;// 坦克的大小
