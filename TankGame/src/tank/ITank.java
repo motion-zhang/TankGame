@@ -8,7 +8,7 @@ public interface ITank {
 
 	void move();
 
-	void CollideTank(Tank tank);
+	void collideTank(Tank tank);
 
 	void fire();
 

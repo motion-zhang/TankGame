@@ -11,10 +11,10 @@ public class Tank implements ITank {
 	private boolean alive = false; // Check whether tank alive
 	private Steering vel = new Steering(); // velocity and position
 	private Bullet bullet;
-	private int index;
+	private int index; // 0: player tank, else AI tank
 	private int x;
 	private int y;
-	public int direction;
+	public int direction; // 0, 1, 2, 3, 4, 1 up, 2 down, 3 left, 4 right;
 
 
 	/*
@@ -60,11 +60,94 @@ public class Tank implements ITank {
 
 	@Override
 	public void move() {
-		return;
+		if (this.direction == 0) {
+			return;
+		}
+		else if (this.direction == 1) {
+			this.y -= 5;
+		}
+		else if (this.direction == 2) {
+			this.y += 5;
+		}
+		else if (this.direction == 3) {
+			this.x -= 5;
+		}
+		else if (this.direction == 4) {
+			this.x += 5 ;
+		}
 	}
 
+
 	@Override
-	public void CollideTank(Tank tank) {
+	// steering behaviors not applied yet
+	public void collideTank(Tank tank) {
+		// Collision happens by up-down, left-right, still-up, still down, still right, still left
+
+
+		// Player AI collide
+		if (this.index == 0 || tank.index == 0) {
+			// Check the direction
+			if (this.collideDirection(tank) == 12) {
+				this.y += 5;
+				tank.y -= 5;
+			}
+			if (this.collideDirection(tank) == 21) {
+				this.y -= 5;
+				tank.y += 5;
+			}
+			if (this.collideDirection(tank) == 34) {
+				this.x += 5;
+				tank.x += 5;
+			}
+			if (this.collideDirection(tank) == 43) {
+				this.x -= 5;
+				tank.x -= 5;
+			}
+
+
+
+
+			// Then Compare steering behavior to decide which will bounce away// crash
+
+		}
+		// AI AI collide
+		else if (this.index != 0 && tank.index != 0) {
+			// Check the direction first
+
+			// will be at the same amplitude of bouncing off since two tanks are the same (both AI)
+
+
+		}
+		else {
+			return;
+		}
+
+	}
+
+	private int collideDirection(Tank tank) {
+		// up - down collide
+		if (this.direction == 1 && tank.direction == 2) {
+			return 12;
+		}
+		// down - up collide
+		if (this.direction == 2 && tank.direction == 1) {
+			return 21;
+		}
+		// left right
+		if (this.direction == 3 && tank.direction == 4) {
+			return 34;
+		}
+		// right - left
+		if (this.direction == 2 && tank.direction == 1) {
+			return 43;
+		}
+		// collide with still tank
+		if (this.direction == 0) {
+			return 0;
+		}
+		if (tank.direction == 0) {
+			return 1;
+		}
 
 	}
 
