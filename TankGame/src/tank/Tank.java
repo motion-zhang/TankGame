@@ -10,7 +10,8 @@ public class Tank implements ITank {
 
 	private boolean alive = false; // Check whether tank alive
 	private Steering steering = new Steering(); // velocity and position
-	private Bullet bullet = new Bullet();
+	private Bullet bullet = new Bullet(1,1,1);
+	private int index;
 
 
 	public int type;// 坦克类型 0:老巢 大于0：玩家坦克 小于0：敌方坦克（电脑）
@@ -29,12 +30,12 @@ public class Tank implements ITank {
 	public boolean isSuspend;
 
 
-	Tank (boolean alive, Steering vel, int direction, Steering steering, Bullet bullet) {
+	Tank (int index, boolean alive, Steering vel, int direction, Steering steering, Bullet bullet) {
+		this.index = index;
 		this.alive = alive;
 		this.steering = steering;
 		this.direction = direction;
 		this.bullet = bullet;
-
 	}
 
 	/**
@@ -110,7 +111,7 @@ public class Tank implements ITank {
 		case 4:
 			bullet.vy = bullet.v;
 		}
-		bullet.start();// 启动子弹线程
+		//bullet.start();// 启动子弹线程
 		GameEngine.bulletArray.add(bullet);// 添加子弹到子弹队列
 	}
 

@@ -13,7 +13,7 @@ public class Bullet{
 	public int x, y;// ����
 	public int type;// �ӵ�����
 	public int power;// �ӵ�����
-	public int status = 1;// �ӵ���ǰ��״̬ 0������ 1�����
+	public int status = 1;// �ӵ���ǰ��״̬ 0������ 1�����e
 	public int size = 12;
 	public boolean isStop = false;
 	public boolean isSuspend = false;
@@ -26,7 +26,7 @@ public class Bullet{
 		isSuspend = true;
 	}
 
-	public Bullet() {
+	public Bullet(int type, int x, int y) {
 		this.type = type;
 		this.x = x;
 		this.y = y;
