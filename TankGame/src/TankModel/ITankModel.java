@@ -1,11 +1,11 @@
 package TankModel;
 
-import tank.Tank;
+import tank.ITank;
 
 public interface ITankModel {
 
   //Get the player's tank at that time.
-  public Tank getPlayerTank();
+  public ITank getPlayerTank();
 
   //Move the tank by the certain direction.
   public void move(int direction);
