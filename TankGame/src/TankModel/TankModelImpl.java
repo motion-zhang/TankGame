@@ -1,13 +1,18 @@
 package TankModel;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import bullet.Bullet;
+import processing.core.PVector;
 import tank.ITank;
 import tank.Steering;
 import tank.Tank;
 
 public class TankModelImpl implements ITankModel {
+  List<Bullet> bulletList;
   Terrain [][] background;
   HashMap<Integer, ITank> enemyTank;
   ITank playerTank;
@@ -18,7 +23,9 @@ public class TankModelImpl implements ITankModel {
     enemyTank = new HashMap<>();
     playerTank = null;
     index = 0;
+    bulletList = new ArrayList<>();
   }
+
 
   @Override
   public ITank getPlayerTank() {
@@ -41,9 +48,18 @@ public class TankModelImpl implements ITankModel {
   }
 
   @Override
+  public List<ITank> getEnemyTank() {
+    ArrayList<ITank> result = new ArrayList<>();
+    for(int index: enemyTank.keySet()) {
+      result.add(enemyTank.get(index));
+    }
+    return result;
+  }
+
+  @Override
   public void addEnemyTank(int x, int y) {
-    ITank newTank = new Tank(index,true,new Steering(x,y), 0, new Steering(0,0),
-            new Bullet(0, x, y));
+    ITank newTank = new Tank(index,0,0,true, new Steering(0,
+            0),0);
     enemyTank.put(index, newTank);
     index += 1;
   }
@@ -61,5 +77,10 @@ public class TankModelImpl implements ITankModel {
         enemyTank.remove(index);
       }
     }
+  }
+
+  @Override
+  public void addBullet(PVector velocity, float direction) {
+    //Bullet newBullet = new Bullet(0,)
   }
 }

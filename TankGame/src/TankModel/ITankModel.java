@@ -1,5 +1,8 @@
 package TankModel;
 
+import java.util.List;
+
+import processing.core.PVector;
 import tank.ITank;
 
 public interface ITankModel {
@@ -17,6 +20,8 @@ public interface ITankModel {
   //Let the player;s tank fire.
   public void playerFire();
 
+  public List<ITank> getEnemyTank();
+
   //Add a tank and give a unique index
   public void addEnemyTank(int x, int y);
 
@@ -25,4 +30,6 @@ public interface ITankModel {
 
   //remove the tank which is already dead.
   public void clearDeadTank();
+
+  public void addBullet(PVector velocity, float direction);
 }
