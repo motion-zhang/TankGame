@@ -10,6 +10,9 @@ public class Tank implements ITank {
 
 	private boolean alive = false; // Check whether tank alive
 	private Steering vel = new Steering(); // velocity according to steering behavior
+	private Steering pos = new Steering(); // location of the tank
+	private Bullet bullet = new Bullet();
+	public Steering direction;// 坦克当前前进方向
 
 
 	public int type;// 坦克类型 0:老巢 大于0：玩家坦克 小于0：敌方坦克（电脑）
@@ -21,10 +24,20 @@ public class Tank implements ITank {
 	public int vright = 0;// 当前 右速度
 	public int v = 3;// 没有阻碍物时的速度
 	public int status = 1;// 坦克当前的状态 0：销毁 1:存活
-	public int direction;// 坦克当前前进方向
+
 	public boolean enemyFire = false;// 敌方坦克能否开火
 	public boolean isStop;
 	public boolean isSuspend;
+
+
+	Tank (boolean alive, Steering vel, Steering direction, Steering pos, Bullet bullet) {
+		this.alive = alive;
+		this.vel = vel;
+		this.direction = direction;
+		this.bullet = bullet;
+		this.pos = pos;
+		
+	}
 
 	/**
 	 * 坦克移动的方法(仅限玩家坦克)
@@ -60,6 +73,26 @@ public class Tank implements ITank {
 		}
 	}
 
+	@Override
+	public Steering getVel() {
+		return null;
+	}
+
+	@Override
+	public Boolean getAlive() {
+		return null;
+	}
+
+	@Override
+	public void move() {
+
+	}
+
+	@Override
+	public void CollideTank() {
+
+	}
+
 	// 坦克开枪
 	public void fire() {
 		// 创建子弹线程
@@ -81,6 +114,31 @@ public class Tank implements ITank {
 		}
 		bullet.start();// 启动子弹线程
 		GameEngine.bulletArray.add(bullet);// 添加子弹到子弹队列
+	}
+
+	@Override
+	public void CollideWall() {
+
+	}
+
+	@Override
+	public void getPlayerTank() {
+
+	}
+
+	@Override
+	public void addAITankTank() {
+
+	}
+
+	@Override
+	public void addPlayerTank() {
+
+	}
+
+	@Override
+	public void addAITank() {
+
 	}
 
 	/**

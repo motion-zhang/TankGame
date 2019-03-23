@@ -5,15 +5,15 @@ import java.util.Vector;
 import engine.GameEngine;
 import tank.Tank;
 
-public class Bullet extends Thread {
-	public int v = 6;// ËÙ¶È
-	public int direction;// ·½Ïò 1:×ó 2£ºÉÏ 3£ºÓÒ 4£ºÏÂ
-	public int vx;// ×Óµ¯ºáÏò·¢ÉäµÄËÙ¶È
-	public int vy;// ×Óµ¯×ÝÏò·¢ÉäµÄËÙ¶È
-	public int x, y;// ×ø±ê
-	public int type;// ×Óµ¯ÀàÐÍ
-	public int power;// ×Óµ¯ÄÜÁ¿
-	public int status = 1;// ×Óµ¯µ±Ç°µÄ×´Ì¬ 0£ºÏú»Ù 1£º´æ»î
+public class Bullet{
+	public int v = 6;// ï¿½Ù¶ï¿½
+	public int direction;// ï¿½ï¿½ï¿½ï¿½ 1:ï¿½ï¿½ 2ï¿½ï¿½ï¿½ï¿½ 3ï¿½ï¿½ï¿½ï¿½ 4ï¿½ï¿½ï¿½ï¿½
+	public int vx;// ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½
+	public int vy;// ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½
+	public int x, y;// ï¿½ï¿½ï¿½ï¿½
+	public int type;// ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½
+	public int power;// ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½
+	public int status = 1;// ï¿½Óµï¿½ï¿½ï¿½Ç°ï¿½ï¿½×´Ì¬ 0ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 1ï¿½ï¿½ï¿½ï¿½ï¿½
 	public int size = 12;
 	public boolean isStop = false;
 	public boolean isSuspend = false;
@@ -26,19 +26,19 @@ public class Bullet extends Thread {
 		isSuspend = true;
 	}
 
-	public Bullet(int type, int x, int y) {
+	public Bullet() {
 		this.type = type;
 		this.x = x;
 		this.y = y;
 	}
 
 	/**
-	 * ×Óµ¯ÅöÌ¹¿Ë
+	 * ï¿½Óµï¿½ï¿½ï¿½Ì¹ï¿½ï¿½
 	 */
 	public void destoryTank() {
 		Vector<Tank> ta = GameEngine.tankArray;
 		for (int i = 0; i < ta.size(); i++) {
-			if (ta.get(i).type != this.type) {// ×Ô¼ºµÄ×Óµ¯²»ÄÜÏûÃð×Ô¼º
+			if (ta.get(i).type != this.type) {// ï¿½Ô¼ï¿½ï¿½ï¿½ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¼ï¿½
 				if (this.x + this.size > ta.get(i).x
 						&& this.x < ta.get(i).x + ta.get(i).size
 						&& this.y + this.size > ta.get(i).y
@@ -52,7 +52,7 @@ public class Bullet extends Thread {
 	}
 
 	/**
-	 * ×Óµ¯Åö×Óµ¯
+	 * ï¿½Óµï¿½ï¿½ï¿½ï¿½Óµï¿½
 	 */
 	public void destoryBullet() {
 		Vector<Bullet> ba = GameEngine.bulletArray;
@@ -72,7 +72,7 @@ public class Bullet extends Thread {
 	}
 
 	/**
-	 * ×Óµ¯Åö±Ú
+	 * ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	public void bulletCollision() {
 		if (this.x <= 0 || this.x + this.size >= 240 || this.y <= 0
