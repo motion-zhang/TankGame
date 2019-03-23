@@ -16,4 +16,13 @@ public interface ITankModel {
 
   //Let the player;s tank fire.
   public void playerFire();
+
+  //Add a tank and give a unique index
+  public void addEnemyTank(int x, int y);
+
+  //remove the tank if it is dead by index.
+  public void removeEnemyTank(int index);
+
+  //remove the tank which is already dead.
+  public void clearDeadTank();
 }
