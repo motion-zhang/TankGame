@@ -2,25 +2,17 @@ package tank;
 
 public interface ITank {
 
-	Steering getVel();
+	Steering getVelocity();
 
 	Boolean getAlive();
 
 	void move();
 
-	void CollideTank();
+	void CollideTank(Tank tank);
 
 	void fire();
 
 	void CollideWall();
-
-	void getPlayerTank();
-
-	void addAITankTank();
-
-	void addPlayerTank();
-
-	void addAITank();
 
 
 }

@@ -9,11 +9,15 @@ import UI.GameStartUI;
 public class Tank implements ITank {
 
 	private boolean alive = false; // Check whether tank alive
-	private Steering steering = new Steering(); // velocity and position
-	private Bullet bullet = new Bullet(1,1,1);
+	private Steering vel = new Steering(); // velocity and position
+	private Bullet bullet;
 	private int index;
+	private int x;
+	private int y;
+	public int direction;
 
 
+	/*
 	public int type;// 坦克类型 0:老巢 大于0：玩家坦克 小于0：敌方坦克（电脑）
 	public int x, y;// 坦克的当前位置
 	public int size = 16;// 坦克的大小
@@ -23,19 +27,74 @@ public class Tank implements ITank {
 	public int vright = 0;// 当前 右速度
 	public int v = 3;// 没有阻碍物时的速度
 	public int status = 1;// 坦克当前的状态 0：销毁 1:存活
-	public int direction;
+
 
 	public boolean enemyFire = false;// 敌方坦克能否开火
 	public boolean isStop;
 	public boolean isSuspend;
+	*/
 
 
-	Tank (int index, boolean alive, Steering vel, int direction, Steering steering, Bullet bullet) {
+	public Tank (int index, int x, int y, boolean alive, Steering vel, int direction) {
 		this.index = index;
 		this.alive = alive;
-		this.steering = steering;
 		this.direction = direction;
-		this.bullet = bullet;
+		this.bullet = new Bullet();
+		this.vel = vel;
+		this.x = x;
+		this.y = y;
+
+	}
+
+
+
+	@Override
+	public Steering getVelocity() {
+		return this.vel;
+	}
+
+	@Override
+	public Boolean getAlive() {
+		return this.alive;
+	}
+
+	@Override
+	public void move() {
+		return;
+	}
+
+	@Override
+	public void CollideTank(Tank tank) {
+
+	}
+
+	@Override
+	public void CollideWall() {
+
+	}
+
+
+	// 坦克开枪
+	public void fire() {
+		// 创建子弹线程
+		Bullet bullet = new Bullet(type, x + 1, y + 1);
+		bullet.direction = direction - 1;// 获得子弹方向
+		// 子弹速度
+		switch (direction) {
+			case 1:
+				bullet.vx = -bullet.v;
+				break;
+			case 2:
+				bullet.vy = -bullet.v;
+				break;
+			case 3:
+				bullet.vx = bullet.v;
+				break;
+			case 4:
+				bullet.vy = bullet.v;
+		}
+		//bullet.start();// 启动子弹线程
+		GameEngine.bulletArray.add(bullet);// 添加子弹到子弹队列
 	}
 
 	/**
@@ -58,86 +117,18 @@ public class Tank implements ITank {
 	 */
 	public void enemyMove() {
 		switch (direction) {
-		case 1:
-			y -= vup;
-			break;
-		case 2:
-			x -= vleft;
-			break;
-		case 3:
-			y += vdown;
-			break;
-		case 4:
-			x += vright;
+			case 1:
+				y -= vup;
+				break;
+			case 2:
+				x -= vleft;
+				break;
+			case 3:
+				y += vdown;
+				break;
+			case 4:
+				x += vright;
 		}
-	}
-
-	@Override
-	public Steering getVel() {
-		return null;
-	}
-
-	@Override
-	public Boolean getAlive() {
-		return null;
-	}
-
-	@Override
-	public void move() {
-
-	}
-
-	@Override
-	public void CollideTank() {
-
-	}
-
-	// 坦克开枪
-	public void fire() {
-		// 创建子弹线程
-		Bullet bullet = new Bullet(type, x + 1, y + 1);
-		bullet.direction = direction - 1;// 获得子弹方向
-		// 子弹速度
-		switch (direction) {
-		case 1:
-			bullet.vx = -bullet.v;
-			break;
-		case 2:
-			bullet.vy = -bullet.v;
-			break;
-		case 3:
-			bullet.vx = bullet.v;
-			break;
-		case 4:
-			bullet.vy = bullet.v;
-		}
-		//bullet.start();// 启动子弹线程
-		GameEngine.bulletArray.add(bullet);// 添加子弹到子弹队列
-	}
-
-	@Override
-	public void CollideWall() {
-
-	}
-
-	@Override
-	public void getPlayerTank() {
-
-	}
-
-	@Override
-	public void addAITankTank() {
-
-	}
-
-	@Override
-	public void addPlayerTank() {
-
-	}
-
-	@Override
-	public void addAITank() {
-
 	}
 
 	/**
