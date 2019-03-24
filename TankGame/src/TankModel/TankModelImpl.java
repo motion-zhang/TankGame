@@ -12,6 +12,7 @@ import tank.Steering;
 import tank.Tank;
 
 public class TankModelImpl implements ITankModel {
+  int sizeX, sizeY;
   List<Bullet> bulletList;
   Terrain [][] background;
   HashMap<Integer, ITank> enemyTank;
@@ -19,13 +20,36 @@ public class TankModelImpl implements ITankModel {
   int index;
 
   public TankModelImpl(int sizeX, int sizeY){
+    this.sizeX = sizeX;
+    this.sizeY = sizeY;
     background = new Terrain[sizeX][sizeY];
     enemyTank = new HashMap<>();
     playerTank = null;
     index = 0;
     bulletList = new ArrayList<>();
+    // For now, set the background all plain
+    for(int i = 0; i < sizeX; i ++){
+      for(int j = 0; j < sizeY; j++) {
+        background[i][j] = Terrain.Plain;
+      }
+    }
   }
 
+
+  @Override
+  public int getSizeX() {
+    return sizeX;
+  }
+
+  @Override
+  public int getSizeY() {
+    return sizeY;
+  }
+
+  @Override
+  public Terrain[][] getBackground() {
+    return this.background;
+  }
 
   @Override
   public ITank getPlayerTank() {

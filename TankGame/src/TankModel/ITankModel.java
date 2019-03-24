@@ -7,6 +7,15 @@ import tank.ITank;
 
 public interface ITankModel {
 
+  //Get the x size of the tank
+  public int getSizeX();
+
+  //Get the y size of the tank
+  public int getSizeY();
+
+  //Get the background setting of the tank model
+  public Terrain[][] getBackground();
+
   //Get the player's tank at that time.
   public ITank getPlayerTank();
 
