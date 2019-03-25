@@ -9,8 +9,8 @@ import UI.GameStartUI;
 public class Tank implements ITank {
 
 	private boolean alive = false; // Check whether tank alive
-	private Steering vel = new Steering(); // velocity and position
-	private Bullet bullet;
+	public Steering vel; // velocity and position
+	public Bullet bullet;
 	private int index; // 0: player tank, else AI tank
 	private int x;
 	private int y;
@@ -96,35 +96,14 @@ public class Tank implements ITank {
 		// Player AI collide
 		if (this.index == 0 || tank.index == 0) {
 			// Check the direction
-			if (this.collideDirection(tank) == 12) {
-				this.y += 5;
-				tank.y -= 5;
-			}
-			if (this.collideDirection(tank) == 21) {
-				this.y -= 5;
-				tank.y += 5;
-			}
-			if (this.collideDirection(tank) == 34) {
-				this.x += 5;
-				tank.x += 5;
-			}
-			if (this.collideDirection(tank) == 43) {
-				this.x -= 5;
-				tank.x -= 5;
-			}
-
-
-
-
+			this.collideDirection(tank, 0);
 			// Then Compare steering behavior to decide which will bounce away// crash
 
 		}
 		// AI AI collide
 		else if (this.index != 0 && tank.index != 0) {
 			// Check the direction first
-
-			// will be at the same amplitude of bouncing off since two tanks are the same (both AI)
-
+			this.collideDirection(tank, 1);
 
 		}
 		else {
@@ -133,31 +112,59 @@ public class Tank implements ITank {
 
 	}
 
-	private int collideDirection(Tank tank) {
+	@Override
+	public void fire() {
+		return;
+	}
+
+	private void collideDirection(Tank tank, int type) {
+
 		// up - down collide
 		if (this.direction == 1 && tank.direction == 2) {
-			return 12;
+			if (type == 0) {
+				this.y += 5;
+				tank.y -= 5;
+			}
+			else {
+				this.y += 2;
+				tank.y -= 2;
+			}
+
 		}
 		// down - up collide
 		if (this.direction == 2 && tank.direction == 1) {
-			return 21;
+			if (type == 0) {
+				this.y -= 5;
+				tank.y += 5;
+			}
+			else {
+				this.y -= 2;
+				tank.y += 2;
+			}
+
 		}
 		// left right
 		if (this.direction == 3 && tank.direction == 4) {
-			return 34;
+			if (type == 0) {
+				this.x += 5;
+				tank.x += 5;
+			}
+			else {
+				this.x += 2;
+				tank.x += 2;
+			}
 		}
 		// right - left
 		if (this.direction == 2 && tank.direction == 1) {
-			return 43;
+			if (type == 0) {
+				this.x -= 5;
+				tank.x -= 5;
+			}
+			else {
+				this.x -= 2;
+				tank.x -= 2;
+			}
 		}
-		// collide with still tank
-		if (this.direction == 0) {
-			return 0;
-		}
-		if (tank.direction == 0) {
-			return 1;
-		}
-
 	}
 
 	@Override
@@ -165,7 +172,7 @@ public class Tank implements ITank {
 
 	}
 
-
+/*
 	// 坦克开枪
 	public void fire() {
 		// 创建子弹线程
@@ -189,9 +196,9 @@ public class Tank implements ITank {
 		GameEngine.bulletArray.add(bullet);// 添加子弹到子弹队列
 	}
 
-	/**
+	 *
 	 * 坦克移动的方法(仅限玩家坦克)
-	 */
+	 *
 	public void playerMove() {
 		if (GameStartUI.isUp) {
 			y -= vup;
@@ -204,9 +211,9 @@ public class Tank implements ITank {
 		}
 	}
 
-	/**
+	 *
 	 * 敌方坦克移动
-	 */
+	 *
 	public void enemyMove() {
 		switch (direction) {
 			case 1:
@@ -223,9 +230,9 @@ public class Tank implements ITank {
 		}
 	}
 
-	/**
+	 *
 	 * 坦克触碰
-	 */
+	 *
 	public void tankCollision() {
 		// 坦克和坦克的触碰
 		Vector<Tank> Array = GameEngine.tankArray;
@@ -332,9 +339,9 @@ public class Tank implements ITank {
 		isSuspend = false;
 	}
 
-	/**
+	**
 	 * 线程运行的方法
-	 */
+	 *
 	public void run() {
 		boolean iscd = true;// 发子弹是否冷却
 		long fireTime = 0;// 发子弹那一刻的时间
@@ -377,4 +384,6 @@ public class Tank implements ITank {
 			}
 		}
 	}
+	*/
+
 }
