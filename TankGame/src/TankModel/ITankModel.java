@@ -7,6 +7,7 @@ import tank.ITank;
 
 public interface ITankModel {
 
+  public void addPlayerTank(ITank player);
   //Get the x size of the tank
   public int getSizeX();
 

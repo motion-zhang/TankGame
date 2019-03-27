@@ -16,7 +16,7 @@ public class DisplayPanel extends JPanel {
   private int tick = 0;
   private boolean isPlaying = true;
 
-  public DisplayPanel(ITankModel model) {
+  DisplayPanel(ITankModel model) {
     if(model == null){
       throw new IllegalArgumentException("No model given in!");
     }
@@ -26,20 +26,20 @@ public class DisplayPanel extends JPanel {
   @Override
   public void paintComponent(Graphics g) {
     super.paintComponent(g);
+    Graphics2D graphics2D = (Graphics2D) g;
+    paintBackGround(graphics2D);
 
-    paintBackGround(g);
-
-    //ITank oneTank;
     for(ITank enemy : tankModel.getEnemyTank()) {
-      paintTank(enemy, g);
+      paintTank(enemy, graphics2D);
     }
 
-    paintTank(tankModel.getPlayerTank(), g);
+    paintTank(tankModel.getPlayerTank(), graphics2D);
+    g.dispose();
 
   }
 
-  private void paintBackGround(Graphics g) {
-    Graphics2D graphics2D = (Graphics2D) g.create();
+  private void paintBackGround(Graphics2D graphics2D) {
+    //Graphics2D graphics2D = (Graphics2D) g.create();
     graphics2D.setColor(Color.WHITE);
     Terrain[][] background = tankModel.getBackground();
     int sizeX = tankModel.getSizeX();
@@ -60,25 +60,23 @@ public class DisplayPanel extends JPanel {
             throw new IllegalArgumentException("Cannot read this cell" + " i " + " j \n");
           }
         }
-        g.fillRect(i * 20, j * 20, 20, 20);
-        g.dispose();
+        graphics2D.fillRect(i * 20, j * 20, 20, 20);
       }
     }
   }
 
-  private void paintTank(ITank tank, Graphics graphics) {
-    Graphics2D g = (Graphics2D) graphics.create();
+  private void paintTank(ITank tank, Graphics2D graphics2D) {
 
-    g.setColor(new Color(0,0,0));
+    graphics2D.setColor(new Color(tank.getX()* 40 % 255,tank.getX()* 20 % 255
+            ,tank.getX()* 10 % 255));
     //g.translate(-1 * tank.getX(), );
-    int x = tank.getX();
-    int y = tank.getY();
+    int x = tank.getX() * 20;
+    int y = tank.getY() * 20;
     int width = 20;
     int height = 20;
-    int centerX = x + width / 2;
-    int centerY = y + height / 2;
-
-    g.fillRect(x,y,width,height);
-    g.dispose();
+    int centerX = x * 20+ width / 2;
+    int centerY = y * 20+ height / 2;
+    graphics2D.fillRect(x,y,width,height);
+    //g.dispose();
   }
 }

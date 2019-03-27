@@ -37,6 +37,11 @@ public class TankModelImpl implements ITankModel {
 
 
   @Override
+  public void addPlayerTank(ITank player) {
+    this.playerTank = player;
+  }
+
+  @Override
   public int getSizeX() {
     return sizeX;
   }
@@ -82,7 +87,7 @@ public class TankModelImpl implements ITankModel {
 
   @Override
   public void addEnemyTank(int x, int y) {
-    ITank newTank = new Tank(index,0,0,true, new Steering(0,
+    ITank newTank = new Tank(index,x,y,true, new Steering(0,
             0),0);
     enemyTank.put(index, newTank);
     index += 1;
