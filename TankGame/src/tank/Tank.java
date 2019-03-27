@@ -169,6 +169,29 @@ public class Tank implements ITank {
 
 	@Override
 	public void CollideWall() {
+		// Assume a 300 * 300 game
+		if (this.x < 5 || this.x > 295 || this.y < 5 || this.y > 295) {
+			if (this.x < 5) {
+				this.x += 10;
+			}
+			if (this.x > 5) {
+				this.x -= 10;
+			}
+			if (this.y < 5) {
+				this.y += 10;
+			}
+			if (this.y > 295) {
+				this.y -= 10;
+			}
+			this.reDirect();
+		}
+	}
+
+	private void reDirect(){
+		if (this.direction == 1) {this.direction = 2;}
+		if (this.direction == 2) {this.direction = 1;}
+		if (this.direction == 3) {this.direction = 4;}
+		if (this.direction == 4) {this.direction = 3;}
 
 	}
 
