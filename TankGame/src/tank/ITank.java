@@ -6,13 +6,13 @@ public interface ITank {
 
 	Boolean getAlive();
 
-	void move();
+	void move(int direction);
 
 	void collideTank(Tank tank);
 
 	void fire();
 
-	void CollideWall();
+	void collideWall();
 
 	int getX();
 

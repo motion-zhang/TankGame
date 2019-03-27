@@ -1,13 +1,7 @@
 package bullet;
 
-import java.util.Vector;
-
-import engine.GameEngine;
 import processing.core.PVector;
 import tank.Tank;
-
-import java.util.Comparator;
-
 
 
 public class Bullet{

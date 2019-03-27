@@ -63,7 +63,7 @@ public class TankModelImpl implements ITankModel {
 
   @Override
   public void move(int direction) {
-    playerTank.move();
+    playerTank.move(direction);
   }
 
   @Override
